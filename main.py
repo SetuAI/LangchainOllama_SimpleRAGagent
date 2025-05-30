@@ -15,8 +15,6 @@ from vector import retriever
 model = OllamaLLM(model="llama3.2:1b")
 
 # define the template
-
-
 template = """
 You are an exeprt in answering questions about a pizza restaurant
 

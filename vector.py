@@ -1,5 +1,5 @@
 # here we write script for embedding the documents
-# we are going to host eh vector database locally using ChromaDB
+# we are going to host the vector database locally using ChromaDB
 # and this will quickly look up relevant information and model will use this
 # to reply with response
 
@@ -62,18 +62,19 @@ if add_documents: # if we actually need to add them or doesnt exists then
 # create the vector store
 vector_store = Chroma(
     collection_name="restaurant_reviews", # name of the collection
-    persist_directory=db_location, # store in db
+    persist_directory=db_location, # actual vector db where data vectors to be stored
     embedding_function=embeddings # embedding function is the model we are using
 )
 
 
 if add_documents:
-    vector_store.add_documents(documents=documents, ids=ids) # add docs to the vector store
+    vector_store.add_documents(documents=documents, ids=ids) 
+    # add docs to the vector store
  
 # making vector store usable 
 # retriever is the object that will actually look up the relevant documents   
 retriever = vector_store.as_retriever(
     search_kwargs={"k": 5} # tells the retriever to find and return the top 5 most relevant documents
     # it will look up for 5 relevant reviews and then pass them to the LLM
-    # If you wanted the top 10, you'd use `"k": 10`.
+    # If you wanted the top 10", you'd use `"k": 10`.
 )
